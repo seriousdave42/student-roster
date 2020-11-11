@@ -15,4 +15,7 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
 	
 	@Query("SELECT s from Student s LEFT JOIN s.contact c WHERE c.id IS NULL")
 	List<Student> studentsWithoutContact();
+
+	@Query("SELECT s from Student s LEFT JOIN s.dorm d WHERE d.id IS NULL")
+	List<Student> studentsWithoutDorm();
 }

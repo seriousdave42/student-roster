@@ -1,40 +1,33 @@
 package com.dwatkins.studentroster.models;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="students")
-public class Student {
+@Table(name="dorms")
+public class Dorm {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String firstName;
-	private String lastName;
-	private Integer age;
+	private String name;
 	@Column(updatable=false)
 	private Date createdAt;
 	private Date updatedAt;
-	@OneToOne(mappedBy="student", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private Contact contact;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="dorm_id")
-	private Dorm dorm;
+	@OneToMany(mappedBy="dorm", fetch = FetchType.LAZY)
+	private List<Student> students;
 	
-	public Student() {
+	public Dorm() {
 		
 	}
 
@@ -46,28 +39,20 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public List<Student> getStudents() {
+		return students;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 
 	public Date getCreatedAt() {
@@ -84,22 +69,6 @@ public class Student {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
-	}
-	
-	public Dorm getDorm() {
-		return dorm;
-	}
-
-	public void setDorm(Dorm dorm) {
-		this.dorm = dorm;
 	}
 
 	@PrePersist

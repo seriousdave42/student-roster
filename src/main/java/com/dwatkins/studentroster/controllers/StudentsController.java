@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dwatkins.studentroster.models.Contact;
+import com.dwatkins.studentroster.models.Dorm;
 import com.dwatkins.studentroster.models.Student;
 import com.dwatkins.studentroster.services.StudentService;
 
@@ -26,7 +27,9 @@ public class StudentsController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		List<Object[]> allStudents = studentService.allStudents();
+		List<Dorm> allDorms = studentService.allDorms();
 		model.addAttribute("students", allStudents);
+		model.addAttribute("dorms", allDorms);
 		return "students/home.jsp";
 	}
 	

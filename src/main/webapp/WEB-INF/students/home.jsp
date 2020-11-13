@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>Student Roster</h2>
 	<table class="table">
 		<thead>
 			<tr>
@@ -34,5 +35,23 @@
 	<a href="/students">Add Student</a>
 	<span>  |  </span>
 	<a href="/contacts">Add Contact</a>
+	<br>
+	<h2>Dorm List</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${dorms}" var="dorm">
+				<tr>
+					<td><a href="/dorms/${dorm.id}"><c:out value="${dorm.name}"/></a>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<br>
+	<a href="/dorms">Add Dorm</a>
 </body>
 </html>
